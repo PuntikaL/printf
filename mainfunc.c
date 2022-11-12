@@ -6,12 +6,11 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:33:48 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 21:23:53 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:35:57 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
+#include "printf.h"
 
 int get_format(va_list args, const char format)
 {
