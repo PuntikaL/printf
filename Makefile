@@ -1,4 +1,4 @@
-NAME = libft.a
+NAME = libftprintf.a
 
 SOURCES			= mainfunc.c ft2.c
 

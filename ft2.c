@@ -6,11 +6,12 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 21:49:27 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 23:38:35 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
+#include <stdio.h>
 
 int ft_putchar(int a)
 {
@@ -27,85 +28,91 @@ int ft_printstr(char *str)
 	i = 0;
 	while (str[i])
 	{
-		len += ft_printchar(str[i]);
+		len += ft_putchar(str[i]);
 		i++;
 	}
+	return (len);
+
+}
+int	hexlen(unsigned	int num)
+{
+	int	len;
+
+	len = 0;
+	while (num != 0)
+	{
+		len++;
+		num = num / 16;
+	}
+	return (len);
 }
 
-int	ft_printhexUp(unsigned int dec, int length)
+int	ft_printhexUp(unsigned int dec)
+{	
+	if (dec > 15)
+	{
+		ft_printhexUp(dec / 16);
+		write (1,&"0123456789ABCDEF"[dec % 16],1); 
+	}
+	else
+	{
+		write (1, &"0123456789ABCDEF"[dec], 1);
+	}
+	return hexlen(dec); 
+}
+
+int	ft_printhexLow(unsigned int dec)
 {
 	if (dec > 15)
 	{
-		ft_printhex(dec / 16, length);
-		length += ft_putchar(dec % 16 + '0');
-	}
-	else if (dec > 9)
-	{
-		if (dec == 10)
-			length += ft_putchar('A');
-		if (dec == 11)
-			length += ft_putchar('B');
-		if (dec == 12)
-			length += ft_putchar('C');
-		if (dec == 13)
-			length += ft_putchar('D');
-		if (dec == 14)
-			length += ft_putchar('E');
-		if (dec == 15)
-			length += ft_putchar('F');
+		ft_printhexLow(dec / 16);
+		write (1,&"0123456789abcdef"[dec % 16],1); 
 	}
 	else
-		length += ft_putchar(dec);
-	return length; 
+	{
+		write (1, &"0123456789abcdef"[dec], 1);
+	}
+	return hexlen(dec); 
 }
 
-int	ft_printhexLow(unsigned int dec, int length)
+int	intlen(int n)
 {
-	if (dec > 15)
+	int	len;
+
+	len = 0;
+	if (n < 0)
 	{
-		ft_printhex(dec / 16, length);
-		length += ft_putchar(dec % 16 + '0');
+		len ++;
+		n *= -1;
 	}
-	else if (dec > 9)
+	while (n > 0)
 	{
-		if (dec == 10)
-			length += ft_putchar('a');
-		if (dec == 11)
-			length += ft_putchar('b');
-		if (dec == 12)
-			length += ft_putchar('c');
-		if (dec == 13)
-			length += ft_putchar('d');
-		if (dec == 14)
-			length += ft_putchar('e');
-		if (dec == 15)
-			length += ft_putchar('f');
+		n = n / 10;
+		len ++;
 	}
-	else
-		length += ft_putchar(dec);
-	return length; 
+	return (len);
 }
 
-int	ft_putnbr(int n, int length)
+int	ft_putnbr(int n)
 {
 	if (n == -2147483648)
-		length += ft_putstr("-2147483648");
+		ft_printstr("-2147483648");
 	else if (n < 0)
 	{
-		length += ft_putchar('-');
-		ft_putnbr(-n, length);
+		ft_putchar('-');
+		ft_putnbr(-n);
 	}
 	else if (n >= 10)
 	{
 		ft_putnbr(n / 10);
-		length += ft_putchar(n % 10 + '0');
+		ft_putchar(n % 10 + '0');
 	}
 	else
-		length += ft_putchar(n + '0');
-	return (length);
+		ft_putchar(n + '0');
+	return (intlen(n));
 }
 
-char	numlen(unsigned int n)
+char	numlen(unsigned int num)
 {
 	int	len;
 	
@@ -121,10 +128,10 @@ char	numlen(unsigned int n)
 char	*ft_utoa(unsigned int n)
 {
 	char	*num;
-	int	length;
+	int	len;
 
-	length = numlen(n);
-	num = (char *)malloc(sizeof(char) * (length + 1));
+	len = numlen(n);
+	num = (char *)malloc(sizeof(char) * (len + 1));
 	if (!num)
 		return (0);
 	while (n != 0)
@@ -133,9 +140,10 @@ char	*ft_utoa(unsigned int n)
 		n = n / 10;
 		len --;
 	}
+	return (num);
 }
 
-void	print_unsigned_int(unsigned int n)
+int	print_unsigned_int(unsigned int n)
 {
 	int	length;
 	char	*num;
@@ -152,12 +160,12 @@ void	print_unsigned_int(unsigned int n)
 	return (length);
 }
 
-int ft_printpointer(unsigned long long)
+int ft_printpointer(unsigned long long p)
 {
 	int	length;
 
 	length = 2;
-	ft_putstr("0x");
-	length += ft_printhex();
+	ft_printstr("0x");
+	length += ft_printhexUp(p);
 	return (length);
 }
