@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 23:38:35 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:27:27 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	hexlen(unsigned	int num)
 	return (len);
 }
 
-int	ft_printhexUp(unsigned int dec)
+int	ft_printhex_up(unsigned int dec)
 {	
 	if (dec > 15)
 	{
-		ft_printhexUp(dec / 16);
+		ft_printhex_up(dec / 16);
 		write (1,&"0123456789ABCDEF"[dec % 16],1); 
 	}
 	else
@@ -61,11 +61,11 @@ int	ft_printhexUp(unsigned int dec)
 	return hexlen(dec); 
 }
 
-int	ft_printhexLow(unsigned int dec)
+int	ft_printhex_low(unsigned int dec)
 {
 	if (dec > 15)
 	{
-		ft_printhexLow(dec / 16);
+		ft_printhex_low(dec / 16);
 		write (1,&"0123456789abcdef"[dec % 16],1); 
 	}
 	else
@@ -166,6 +166,6 @@ int ft_printpointer(unsigned long long p)
 
 	length = 2;
 	ft_printstr("0x");
-	length += ft_printhexUp(p);
+	length += ft_printhex_low(p);
 	return (length);
 }

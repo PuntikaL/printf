@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:33:48 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 23:36:07 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:24:53 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int get_format(va_list args, const char format)
 {
 	int len;
- 
-       	write (1, &format, 1);
-	if (format != 'X')
-		write (3, "no\n", 1);	
+ 	
 	len = 0;
 	if (format == 'c')
 		len += ft_putchar(va_arg(args, int));
@@ -31,12 +28,9 @@ int get_format(va_list args, const char format)
 	else if (format == 'u')
 		len += print_unsigned_int(va_arg(args, unsigned int)); 
 	else if (format == 'x')
-	{
-		len += ft_printhexLow(va_arg(args, unsigned int));
-		write (1, &format, 1);
-	}
+		len += ft_printhex_low(va_arg(args, unsigned int));
 	else if (format == 'X')
-		len += ft_printhexUp(va_arg(args, unsigned int));
+		len += ft_printhex_up(va_arg(args, unsigned int));
 	else if (format == 'i')
 		len += ft_putnbr(va_arg(args, unsigned int));
 	else if (format == '%')
