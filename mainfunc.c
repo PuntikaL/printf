@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:33:48 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/11 21:51:41 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:23:53 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,23 @@ int get_format(va_list args, const char format)
   
 	len = 0;
 	if (format == 'c')
-		len += ft_printchar(va_args(args, int));
+		len += ft_putchar(va_args(args, int));
 	else if (format == 's')
-		len += ft_printchar(va_args(args, char *));
+		len += ft_printstr(va_args(args, char *));
 	else if (format == 'p')
-		len += ft_printchar(va_args(args, unsigned long long));
+		len += ft_printpointer(va_args(args, unsigned long long));
 	else if (format == 'd')
-		len += ft_printchar(va_args(args, int));
+		len += ft_putnbr(va_args(args, int));
 	else if (format == 'u')
-		len += ft_printchar(va_args(args, unsigned int)); 
+		len += ft_printunbr(va_args(args, unsigned int), 0); 
 	else if (format == 'x')
-		len += ft_printchar(va_args(args, unsigned int));
+		len += ft_printhexLow(va_args(args, unsigned int), 0);
+	else if (format == 'X')
+		len += ft_printhexUp(va_args(args, unsigned int));
+	else if (format == 'i')
+		len += ft_putnbr(va_args(args, unsigned int));
 	else if (format == '%')
-		len += ft_printchar(va_args(args, char *));
+		len += ft_putchar('%');
 	return (len);
 }
 
