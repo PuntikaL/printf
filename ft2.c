@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/11 21:57:56 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 07:58:12 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,31 @@ int ft_printstr(char *str)
 	}
 }
 
-int	ft_printhex(unsigned int dec)
+int	ft_printhex(unsigned int dec, int length)
 {
-	if (dec > 9)
-		ft_printhex(dex / 16);
+	if (dec > 15)
+	{
+		ft_printhex(dec / 16, length);
+		length += ft_putchar(dec % 16 + '0');
+	}
+	else if (dec > 9)
+	{
+		if (dec == 10)
+			length += ft_putchar('A');
+		if (dec == 11)
+			length += ft_putchar('B');
+		if (dec == 12)
+			length += ft_putchar('C');
+		if (dec == 13)
+			length += ft_putchar('D');
+		if (dec == 14)
+			length += ft_putchar('E');
+		if (dec == 15)
+			length += ft_putchar('F');
+	}
 	else
-		ft_p
+		length += ft_putchar(dec);
+	return length; 
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -58,7 +77,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar(n + '0');
 }
 
-int ft_printpointer(int num)
+int ft_printpointer(unsigned long long)
 {
 	
 }
