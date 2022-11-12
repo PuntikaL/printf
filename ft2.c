@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 21:24:09 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:49:27 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,23 @@ int	ft_printhexLow(unsigned int dec, int length)
 	return length; 
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(int n, int length)
 {
 	if (n == -2147483648)
-		ft_putstr("-2147483648");
+		length += ft_putstr("-2147483648");
 	else if (n < 0)
 	{
-		ft_putchar('-');
-		ft_putnbr(-n);
+		length += ft_putchar('-');
+		ft_putnbr(-n, length);
 	}
 	else if (n >= 10)
 	{
 		ft_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
+		length += ft_putchar(n % 10 + '0');
 	}
 	else
-		ft_putchar(n + '0');
+		length += ft_putchar(n + '0');
+	return (length);
 }
 
 char	numlen(unsigned int n)

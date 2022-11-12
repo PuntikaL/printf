@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:33:48 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/12 21:42:28 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:49:46 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int get_format(va_list args, const char format)
 	else if (format == 'p')
 		len += ft_printpointer(va_arg(args, unsigned long long));
 	else if (format == 'd')
-		len += ft_putnbr(va_arg(args, int));
+		len += ft_putnbr(va_arg(args, int), 0);
 	else if (format == 'u')
 		len += ft_printunbr(va_arg(args, unsigned int), 0); 
 	else if (format == 'x')
