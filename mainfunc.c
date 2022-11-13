@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:33:48 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/13 07:16:04 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/13 10:16:06 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int get_format(va_list args, const char format)
 
 int ft_printf(const char *str, ...)
 {
-  int i;
-  va_list args;
-  int print_length;
+  int		i;
+  va_list	args;
+  int		print_length;
   
   i = 0;
   print_length = 0;

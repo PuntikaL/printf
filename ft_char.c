@@ -1,54 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 07:01:23 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/13 10:09:05 by pleepago         ###   ########.fr       */
+/*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
+/*   Updated: 2022/11/13 10:07:23 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_nbrlen(long n)
+int ft_putchar(int a)
 {
-	int		i;
+	write (1, &a, 1);
+	return (1);
+}
 
-	i = 1;
+int ft_printstr(char *str)
+{
+	int len;
+	int i;
+	
+	len = 0;
+	i = 0;
+	if (str == NULL)
+	{
+		ft_printstr("(null)");
+		return (6);
+	}
+	while (str[i])
+	{
+		len += ft_putchar(str[i]);
+		i++;
+	}
+	return (len);
+
+}
+
+int	intlen(int n)
+{
+	int	len;
+
+	len = 0;
 	if (n < 0)
 	{
+		len ++;
 		n *= -1;
-		i++;
 	}
-	while (n > 9)
+	while (n > 0)
 	{
-		n /= 10;
-		i++;
+		n = n / 10;
+		len ++;
 	}
-	return (i);
+	return (len);
 }
-
-int	ft_putnbr(int a)
-{
-	long n;
-
-	n = (long)a;
-	if (n == -2147483648)
-		ft_printstr("-2147483648");
-	else if (n < 0)
-	{
-		ft_putchar('-');
-		ft_putnbr(-n);
-	}
-	else if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
-	}
-	else
-		ft_putchar(n + '0');
-	return (ft_nbrlen(n));
-}
-

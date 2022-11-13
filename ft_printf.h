@@ -16,7 +16,8 @@ char	numlen(unsigned int n);
 char	*ft_utoa(unsigned int n);
 int	print_unsigned_int(unsigned int n);
 int ft_printpointer(unsigned long long);
-int	intlen(int n);
 int	hexlen(unsigned int num);
-char	*ft_itoa(int n);
+int	ft_nbrlen(long n);
+int	ft_putnbr(int a);
+
 #endif

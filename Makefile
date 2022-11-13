@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pleepago <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/13 10:01:10 by pleepago          #+#    #+#              #
+#    Updated: 2022/11/13 10:11:50 by pleepago         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libftprintf.a
 
-SOURCES			= mainfunc.c ft2.c ft_putnbr.c
+SOURCES	= ft_printpointer.c ft_putnbr.c ft_char.c ft_printunsigned.c ft_printhex.c  mainfunc.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -24,3 +36,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
+
