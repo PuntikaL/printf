@@ -6,7 +6,7 @@
 /*   By: pleepago <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 21:31:27 by pleepago          #+#    #+#             */
-/*   Updated: 2022/11/13 00:27:27 by pleepago         ###   ########.fr       */
+/*   Updated: 2022/11/13 07:27:12 by pleepago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int ft_printstr(char *str)
 	
 	len = 0;
 	i = 0;
+	if (str == NULL)
+	{
+		ft_printstr("(null)");
+		return (6);
+	}
 	while (str[i])
 	{
 		len += ft_putchar(str[i]);
@@ -47,31 +52,37 @@ int	hexlen(unsigned	int num)
 	return (len);
 }
 
-int	ft_printhex_up(unsigned int dec)
+int	ft_printhex_up(unsigned int n)
 {	
+	unsigned long dec;
+
+	if (n == 0)
+		return ft_putchar('0');
+	dec = (unsigned long)n;
 	if (dec > 15)
 	{
 		ft_printhex_up(dec / 16);
 		write (1,&"0123456789ABCDEF"[dec % 16],1); 
 	}
 	else
-	{
 		write (1, &"0123456789ABCDEF"[dec], 1);
-	}
 	return hexlen(dec); 
 }
 
-int	ft_printhex_low(unsigned int dec)
+int	ft_printhex_low(unsigned int n)
 {
+	unsigned long dec;
+	
+	if (n == 0)
+		return ft_putchar('0');
+	dec = (unsigned long)n;
 	if (dec > 15)
 	{
 		ft_printhex_low(dec / 16);
 		write (1,&"0123456789abcdef"[dec % 16],1); 
 	}
 	else
-	{
 		write (1, &"0123456789abcdef"[dec], 1);
-	}
 	return hexlen(dec); 
 }
 
@@ -91,25 +102,6 @@ int	intlen(int n)
 		len ++;
 	}
 	return (len);
-}
-
-int	ft_putnbr(int n)
-{
-	if (n == -2147483648)
-		ft_printstr("-2147483648");
-	else if (n < 0)
-	{
-		ft_putchar('-');
-		ft_putnbr(-n);
-	}
-	else if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putchar(n % 10 + '0');
-	}
-	else
-		ft_putchar(n + '0');
-	return (intlen(n));
 }
 
 char	numlen(unsigned int num)
@@ -160,12 +152,49 @@ int	print_unsigned_int(unsigned int n)
 	return (length);
 }
 
+int	ptrlen(uintptr_t num)
+{
+	int	len;
+
+	len = 0;
+	while (num != 0)
+	{
+		len++;
+		num = num / 16;
+	}
+	return (len);
+}
+
+int	ft_printptr(uintptr_t n)
+{	
+	unsigned long dec;
+
+	if (n == 0)
+		return ft_putchar('0');
+	dec = (unsigned long)n;
+	if (dec > 15)
+	{
+		ft_printptr(dec / 16);
+		write (1,&"0123456789abcdef"[dec % 16],1); 
+	}
+	else
+		write (1, &"0123456789abcdef"[dec], 1);
+	return hexlen(dec); 
+}
+
+
 int ft_printpointer(unsigned long long p)
 {
 	int	length;
 
 	length = 2;
 	ft_printstr("0x");
-	length += ft_printhex_low(p);
+	if(p == 0)
+		length += write(1, "0", 1);
+	else
+	{
+		ft_printptr(p);
+		length += ptrlen(p);
+	}
 	return (length);
 }

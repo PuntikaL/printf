@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-SOURCES			= mainfunc.c ft2.c
+SOURCES			= mainfunc.c ft2.c ft_putnbr.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -16,7 +16,7 @@ $(NAME): $(OBJECTS)
 	$(CC) -c $(CFLAGS) $?
 
 clean:
-	rm -f $(OBJECTS) $(BOBJECTS)
+	rm -f $(OBJECTS) 
 
 fclean: clean
 	rm -f $(NAME)

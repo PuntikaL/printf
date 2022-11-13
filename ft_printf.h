@@ -18,4 +18,5 @@ int	print_unsigned_int(unsigned int n);
 int ft_printpointer(unsigned long long);
 int	intlen(int n);
 int	hexlen(unsigned int num);
+char	*ft_itoa(int n);
 #endif
